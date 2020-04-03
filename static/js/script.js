@@ -26,3 +26,5 @@ function generateCat() {
 function resetImage() {
     document.getElementById("flex-cat-gen").remove();
 }
+
+// Challenge 3: Rock, Paper, Scissors
