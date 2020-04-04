@@ -28,3 +28,23 @@ function resetImage() {
 }
 
 // Challenge 3: Rock, Paper, Scissors
+function rpsGame (yourChoice) {
+    console.log(yourChoice);
+    // console.log(yourChoice.src);
+    var humanChoice, botChoice;
+    // humanChoice = yourChoice.id 
+    // botChoice = numberToChoice(randToRpsInt()); // Comp. Choice
+    // result = decideWinner(humanChoice, botChoice); // [1, 0] or .. [0, 1]
+    // message = finalMessage(results); // 'message': "You won!", 'color': 'green')
+    rpsFrontEnd(yourChoice.id, botChoice, message);
+}
+
+function randToRpsInt() {
+    return Math.floor(Math.random() * 3);
+}
+
+function numberToChoice(number) { // here I give a choce 0 through 2 (3 choices)
+    return ['rock', 'paper', 'scissors'][number] // and here it will give a name assigned to a number in Array
+}
+
+
