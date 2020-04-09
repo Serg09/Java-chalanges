@@ -1,10 +1,11 @@
-.container-1, .container-2, .container-3, .container-4 {
+.container-1, .container-2, .container-3, .container-4, .container-5 {
     border: 1px solid black;
     margin: 10 auto;
     width: 75%;
     text-align: center;
 }
-.flex-box-container-1, .flex-box-container-2, .flex-box-rps, .flex-box-pick-color {
+.flex-box-container-1, .flex-box-container-2, .flex-box-rps, .flex-box-pick-color,
+ .flex-blackjack-row-1, .flex-blackjack-row-2, .flex-blackjack-row-3 {
     display: flex;
     border: 1px solid black;
     padding: 10px;
@@ -13,6 +14,45 @@
     /* flex-direction: column-reverse; */
     /* flex-direction: row-reverse; */
     justify-content: space-around;
+}
+
+.flex-blackjack-row-1, .flex-blackjack-row-2 {
+    /* background: url("https://image.shutterstock.com/image-photo/poker-table-felt-background-green-260nw-138606191.jpg") center; */
+    background: url("https://media.istockphoto.com/photos/casino-green-table-background-picture-id517678619?k=6&m=517678619&s=170667a&w=0&h=FsKMgvb_VKe7II-yhyYka9pG1CTlTyHDKpffCBzRhz4=") center;
+    /* background: url('https://ie2-gfebf.cdnppb.net/mexchangeblackjack/turbo/17/assets/gameView/tableBackground.png?v17') center; */
+    color: ffffff;
+}
+
+.flex-blackjack-row-1 div {
+    border: 1px solid black;
+    padding: 10px;
+    flex: 1;
+    height: 350px;
+    text-align: center;
+}
+
+.flex-blackjack-row-1 img {
+    width: 25%;
+    padding: 10px;
+    object-fit: fill;
+}
+
+.flex-blackjack-row-2 button {
+    border: 1px solid white;
+    padding: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.flex-blackjack-row-2 div {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+table, th, td {
+    padding: 5px;
+    border: 1px solid black;
+    text-align: center;
 }
 
 .flex-box-container-1 div {
@@ -25,12 +65,8 @@
 /* .container-2 {              // dublicated code. just left one included both containers
     border: 1px solid black;
     width: 75%;
-    margin: 10 auto;
-    text-align: center;
-} */
+    margin: 10 auto;6
 
-/* .flex-box-container-2 {
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     border: 1px solid blue;
