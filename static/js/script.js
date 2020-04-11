@@ -173,6 +173,7 @@ let blackjackGame = {
     'you': {'scoreSpan': '#your-blackjack-result', 'div': '#your-box', 'score': 0},
     'dealer': {'scoreSpan': '#dealer-blackjack-result', 'div': '#dealer-box', 'score': 0},
     'cards': ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'K', 'J', 'Q', 'A'],
+    'cardsMap': {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'K':10, 'J':10, 'Q':10, 'A':[1,11]},
 };
 
 const YOU = blackjackGame['you']
@@ -190,6 +191,9 @@ function blackjackHit() {
     let card = randomCard();
     console.log(card);
     showCard(card, YOU);
+    updtaeScore(card, YOU);
+    showScore(YOU);
+    console.log(YOU['score']);
 }
 
 function randomCard() {
@@ -198,10 +202,12 @@ function randomCard() {
 }
 
 function showCard(card, activePlayer) {
-    let cardImage = document.createElement('img');
-    cardImage.src = `static/images/${card}.png`; // ${card} makes 'card' variable. use backslash quotes
-    document.querySelector(activePlayer['div']).appendChild(cardImage); // place img to the right box Yopu
-    hitSound.play();
+    if (activePlayer['score'] <=21) { // If statement showing card until score is less then 21
+        let cardImage = document.createElement('img');
+        cardImage.src = `static/images/${card}.png`; // ${card} makes 'card' variable. use backslash quotes
+        document.querySelector(activePlayer['div']).appendChild(cardImage); // place img to the right box Yopu
+        hitSound.play();
+    }
 }
 
 function blackjackDeal() {
@@ -209,6 +215,7 @@ function blackjackDeal() {
     let dealerImages = document.querySelector('#dealer-box').querySelectorAll('img');
     // console.log(yourImages);
     // yourImages[0].remove(); // to remove all images use for loop (below)
+
     for (i=0; i < yourImages.length; i++) { // reseting all your images
         yourImages[i].remove();
     }
@@ -216,4 +223,38 @@ function blackjackDeal() {
     for (i=0; i < dealerImages.length; i++) { // reseting dealer images
         dealerImages[i].remove();
     }
+
+    YOU['score'] = 0; // with removing images it's also reset the score, Set it to 0
+    DEALER['score'] = 0; // it is important it reset score internaly so we can still can count total score
+
+    document.querySelector('#your-blackjack-result').textContent = 0; // reset to 0 when 'Deal' clicked
+    document.querySelector('#dealer-blackjack-result').textContent = 0; //reset to 0 when 'Deal' clicked
+
+    document.querySelector('#your-blackjack-result').style.color = '#ffffff'; // reset color back to white
+    document.querySelector('#dealer-blackjack-result').style.color = '#ffffff'; // reset color back to white
 }
+
+
+function updtaeScore(card, activePlayer) {
+    if (card === 'A') { // check id card is 'A'
+    // if card is "A' adding 1 or 11. Adding 11 keeps me below 21, add 11. Otherwise, add 1
+    if (activePlayer['score'] + blackjackGame['cardsMap'][card][1] <=21) {
+            activePlayer['score'] += blackjackGame['cardsMap'][card][1];
+        } else {
+            activePlayer['score'] += blackjackGame['cardsMap'][card][0];
+        }
+
+    } else { // this staitment syas that card was not 'A', just increment the score
+        activePlayer['score'] += blackjackGame['cardsMap'][card];
+    }
+}
+
+function showScore(activePlayer) { // count your score (You: 0...)
+    if (activePlayer['score'] > 21) {
+        document.querySelector(activePlayer['scoreSpan']).textContent = 'BUST!';
+        document.querySelector(activePlayer['scoreSpan']).style.color = 'red';
+    } else {
+        document.querySelector(activePlayer['scoreSpan']).textContent = activePlayer['score'];
+    }
+}
+
