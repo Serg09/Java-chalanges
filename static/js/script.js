@@ -290,19 +290,27 @@ function showScore(activePlayer) { // count your score (You: 0...)
     }
 }
 
-function dealerLogic() {
-    blackjackGame['isStand'] = true; // this chages statement isStand to true
-    let card = randomCard(); // shoose random cars
-    showCard(card, DEALER); // show me a card on DEALER side
-    updateScore(card, DEALER); // update score on DEALER side
-    showScore(DEALER);
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    if (DEALER['score'] > 15) {
+async function dealerLogic() {
+    blackjackGame['isStand'] = true; // this chages statement isStand to true
+
+        while (DEALER['score'] < 16 && blackjackGame['isStand'] === true) {
+        let card = randomCard(); // shoose random cars
+        showCard(card, DEALER); // show me a card on DEALER side
+        updateScore(card, DEALER); // update score on DEALER side
+        showScore(DEALER);
+        await sleep (1000);
+    }
+
+    // if (DEALER['score'] > 15) {
         blackjackGame['turnOver'] = true;
         let winner = computeWinner();
         showResult(winner);
-        console.log(blackjackGame['turnOver']);
-    }
+        // console.log(blackjackGame['turnOver']);
+    // }
 }
 
 // compute winner and return who just won
